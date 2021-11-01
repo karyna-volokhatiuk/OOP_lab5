@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter @ToString
-public class FlowerBucket {
-    List<FlowerPack> flowerPacks = new ArrayList<FlowerPack>();
+public class FlowerBucket extends Item{
+    List<FlowerPack> flowerPacks = new ArrayList<>();
 
     public void addFlowerPack(FlowerPack flowerPack){
         flowerPacks.add(flowerPack);
@@ -23,5 +23,10 @@ public class FlowerBucket {
         }
 
         return price;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Flower bucket ";
     }
 }
