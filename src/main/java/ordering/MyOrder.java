@@ -6,14 +6,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import payment.Payment;
+import users.User;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 @Getter @Setter @ToString
 public class MyOrder {
-    LinkedList<Item> items = new LinkedList<>();
+    ArrayList<Item> items = new ArrayList<>();
     Payment paymentStrategy;
     Delivery deliveryStrategy;
+
+    List<User> users = new ArrayList<>();
+
 
     public double calculateTotalPrice(){
         double price = 0;
@@ -44,5 +50,25 @@ public class MyOrder {
         double price = calculateTotalPrice();
         return paymentStrategy.pay(price);
     }
+
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void removeUser(User user){
+        users.remove(user);
+    }
+
+    public void notifyUsers(){
+        for (User user : users){
+            user.update();
+        }
+    }
+
+    public void order(){
+        processOrder();
+        notifyUsers();
+    }
+
 
 }
